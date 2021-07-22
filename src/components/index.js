@@ -20,7 +20,7 @@ function copyProperties(src, target, obj) {
 }
 function updateStructure(recA, recB) {
   //write your code
-  delta = {}; //map
+  var delta = {}; //map
   for (const key in recA) {
     if (key == "children") {
       delta[key] = recA[key];
