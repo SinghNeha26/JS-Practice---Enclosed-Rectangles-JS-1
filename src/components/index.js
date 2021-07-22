@@ -5,9 +5,267 @@
 //	height: '96px',
 //      children: []
 //}
+function isNum(value) {
+  return parseInt(value, 10);
+}
 
-function updateStructure(rec1,rec2){
-	//write your code
+function copyProperties(src, target, obj) {
+  for (const key in src) {
+    if (key == "children") {
+      target[key] = obj[key];
+    } else {
+      target[key] = Math.abs(src[key]);
+    }
+  }
+}
+function updateStructure(recA, recB) {
+  //write your code
+  delta = {}; //map
+  for (const key in recA) {
+    if (key == "children") {
+      delta[key] = recA[key];
+    } else {
+      delta[key] = isNum(recA[key]) - isNum(recB[key]);
+    }
+  }
+  console.log(delta);
+  // If height & width exists
+  const children = {};
+  if (delta.height && delta.width) {
+    console.log("height & width exists");
+    if (delta.height > 0 && delta.width > 0) {
+      //A is bigger
+      console.log("A is bigger");
+      if (delta.top && delta.left) {
+        // If top & left exists
+
+        console.log("top & left exists");
+        if (delta.top < 0 && delta.left < 0) {
+          console.log("contained by A");
+          copyProperties(delta, children, recA);
+          return {
+            top: recA.top,
+            left: recA.left,
+            height: recA.height,
+            width: recA.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      } else if (delta.bottom && delta.right) {
+        console.log("bottom & right exists");
+        if (delta.bottom < 0 && delta.right < 0) {
+          console.log("contained by A");
+          copyProperties(delta, children, recA);
+          return {
+            bottom: recA.bottom,
+            right: recA.right,
+            height: recA.height,
+            width: recA.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      } else if (delta.top && delta.right) {
+        console.log("top & right exists");
+        if (delta.top < 0 && delta.right < 0) {
+          console.log("contained by A");
+          copyProperties(delta, children, recA);
+          return {
+            top: recA.top,
+            right: recA.right,
+            height: recA.height,
+            width: recA.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      } else {
+        console.log("bottom & left exists");
+        if (delta.bottom < 0 && delta.left < 0) {
+          console.log("contained by A");
+          copyProperties(delta, children, recA);
+          return {
+            bottom: recA.bottom,
+            left: recA.left,
+            height: recA.height,
+            width: recA.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      }
+    } else if (delta.height < 0 && delta.width < 0) {
+      //B is bigger
+      console.log(" B is bigger");
+      if (delta.top && delta.left) {
+        // If top & left exists
+
+        console.log("top & left exists");
+        if (delta.top > 0 && delta.left > 0) {
+          console.log("contained by B");
+          copyProperties(delta, children, recB);
+          return {
+            top: recB.top,
+            left: recB.left,
+            height: recB.height,
+            width: recB.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      } else if (delta.bottom && delta.right) {
+        console.log("bottom & right exists");
+        if (delta.bottom > 0 && delta.right > 0) {
+          console.log("contained by B");
+          copyProperties(delta, children, recB);
+          return {
+            bottom: recB.bottom,
+            right: recB.right,
+            height: recB.height,
+            width: recB.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      } else if (delta.top && delta.right) {
+        console.log("top & right exists");
+        if (delta.top > 0 && delta.right > 0) {
+          console.log("contained by B");
+          copyProperties(delta, children, recB);
+          return {
+            top: recB.top,
+            right: recB.right,
+            height: recB.height,
+            width: recB.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      } else {
+        console.log("bottom & left exists");
+        if (delta.bottom > 0 && delta.left > 0) {
+          console.log("contained by B");
+          copyProperties(delta, children, recB);
+          return {
+            bottom: recB.bottom,
+            left: recB.left,
+            height: recB.height,
+            width: recB.width,
+            children: children,
+          };
+        } else {
+          console.log("No one contains each other");
+          return recA;
+        }
+      }
+    } else {
+      // no one contains each other
+      console.log("no one contains each other");
+      return recA;
+    }
+  } else {
+    console.log("t, r, b, l exists");
+    if (
+      delta.top > 0 &&
+      delta.right > 0 &&
+      delta.left > 0 &&
+      delta.bottom > 0
+    ) {
+      console.log("Contained by B");
+      copyProperties(delta, children, recB);
+      return {
+        top: recB.top,
+        left: recB.left,
+        bottom: recB.bottom,
+        right: recB.right,
+        children: children,
+      };
+    } else if (
+      delta.top < 0 &&
+      delta.right < 0 &&
+      delta.left < 0 &&
+      delta.bottom < 0
+    ) {
+      console.log("contained by A");
+      copyProperties(delta, children, recA);
+      return {
+        top: recA.top,
+        left: recA.left,
+        bottom: recA.bottom,
+        right: recA.right,
+        children: children,
+      };
+    } else {
+      console.log("No one contains each other");
+      return recA;
+    }
+  }
 }
 
 module.exports = updateStructure;
+
+//   function enclosed(recA, recB) {}
+// let answer = enclosed(
+//   {
+//     top: "30px",
+//     left: "30px",
+//     height: "20px",
+//     width: "30px",
+//     children: [],
+//   },
+//   {
+//     top: "20px",
+//     left: "20px",
+//     height: "40px",
+//     width: "90px",
+//     children: [],
+//   }
+// );
+// let answer = enclosed(
+//   {
+//     top: "20px",
+//     left: "20px",
+//     bottom: "20px",
+//     right: "20px",
+//     children: [],
+//   },
+//   {
+//     top: "40px",
+//     left: "30px",
+//     bottom: "60px",
+//     right: "30px",
+//     children: [],
+//   }
+// );
+// let answer = enclosed(
+//   {
+//     bottom: "10px",
+//     right: "10px",
+//     height: "40px",
+//     width: "60px",
+//     children: [],
+//   },
+//   {
+//     bottom: "20px",
+//     right: "20px",
+//     height: "10px",
+//     width: "100px",
+//     children: [],
+//   }
+// );
+// console.log(answer);
