@@ -14,7 +14,7 @@ function copyProperties(src, target, obj) {
     if (key == "children") {
       target[key] = obj[key];
     } else {
-      target[key] = Math.abs(src[key]);
+      target[key] = Math.abs(src[key]).toString()+"px";
     }
   }
 }
