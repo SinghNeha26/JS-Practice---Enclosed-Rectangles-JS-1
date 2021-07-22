@@ -48,7 +48,7 @@ function updateStructure(recA, recB) {
             left: recA.left,
             height: recA.height,
             width: recA.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -64,7 +64,7 @@ function updateStructure(recA, recB) {
             right: recA.right,
             height: recA.height,
             width: recA.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -80,7 +80,7 @@ function updateStructure(recA, recB) {
             right: recA.right,
             height: recA.height,
             width: recA.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -96,7 +96,7 @@ function updateStructure(recA, recB) {
             left: recA.left,
             height: recA.height,
             width: recA.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -118,7 +118,7 @@ function updateStructure(recA, recB) {
             left: recB.left,
             height: recB.height,
             width: recB.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -134,7 +134,7 @@ function updateStructure(recA, recB) {
             right: recB.right,
             height: recB.height,
             width: recB.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -150,7 +150,7 @@ function updateStructure(recA, recB) {
             right: recB.right,
             height: recB.height,
             width: recB.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -166,7 +166,7 @@ function updateStructure(recA, recB) {
             left: recB.left,
             height: recB.height,
             width: recB.width,
-            children: children,
+            children: [children],
           };
         } else {
           console.log("No one contains each other");
@@ -193,7 +193,7 @@ function updateStructure(recA, recB) {
         left: recB.left,
         bottom: recB.bottom,
         right: recB.right,
-        children: children,
+        children: [children],
       };
     } else if (
       delta.top < 0 &&
@@ -208,7 +208,7 @@ function updateStructure(recA, recB) {
         left: recA.left,
         bottom: recA.bottom,
         right: recA.right,
-        children: children,
+        children: [children],
       };
     } else {
       console.log("No one contains each other");
@@ -216,11 +216,7 @@ function updateStructure(recA, recB) {
     }
   }
 }
-
-module.exports = updateStructure;
-
-//   function enclosed(recA, recB) {}
-// let answer = enclosed(
+// let answer = updateStructure(
 //   {
 //     top: "30px",
 //     left: "30px",
@@ -236,6 +232,10 @@ module.exports = updateStructure;
 //     children: [],
 //   }
 // );
+// console.log(answer);
+
+module.exports = updateStructure;
+
 // let answer = enclosed(
 //   {
 //     top: "20px",
@@ -268,4 +268,3 @@ module.exports = updateStructure;
 //     children: [],
 //   }
 // );
-// console.log(answer);
