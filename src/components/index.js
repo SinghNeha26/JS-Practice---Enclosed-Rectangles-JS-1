@@ -11,10 +11,10 @@ function isNum(value) {
 
 function copyProperties(src, target, obj) {
   for (const key in src) {
-    if (key == "children") {
+    if (key == "children" || key == "width" || key == "height") {
       target[key] = obj[key];
     } else {
-      target[key] = Math.abs(src[key]).toString()+"px";
+      target[key] = Math.abs(src[key]).toString() + "px";
     }
   }
 }
@@ -47,7 +47,7 @@ function updateStructure(recA, recB) {
         console.log("top & left exists");
         if (delta.top <= 0 && delta.left <= 0) {
           console.log("contained by A");
-          copyProperties(delta, children, recA);
+          copyProperties(delta, children, recB);
           return {
             top: recA.top,
             left: recA.left,
@@ -63,7 +63,7 @@ function updateStructure(recA, recB) {
         console.log("bottom & right exists");
         if (delta.bottom <= 0 && delta.right <= 0) {
           console.log("contained by A");
-          copyProperties(delta, children, recA);
+          copyProperties(delta, children, recB);
           return {
             bottom: recA.bottom,
             right: recA.right,
@@ -79,7 +79,7 @@ function updateStructure(recA, recB) {
         console.log("top & right exists");
         if (delta.top <= 0 && delta.right <= 0) {
           console.log("contained by A");
-          copyProperties(delta, children, recA);
+          copyProperties(delta, children, recB);
           return {
             top: recA.top,
             right: recA.right,
@@ -95,7 +95,7 @@ function updateStructure(recA, recB) {
         console.log("bottom & left exists");
         if (delta.bottom <= 0 && delta.left <= 0) {
           console.log("contained by A");
-          copyProperties(delta, children, recA);
+          copyProperties(delta, children, recB);
           return {
             bottom: recA.bottom,
             left: recA.left,
@@ -117,7 +117,7 @@ function updateStructure(recA, recB) {
         console.log("top & left exists");
         if (delta.top >= 0 && delta.left >= 0) {
           console.log("contained by B");
-          copyProperties(delta, children, recB);
+          copyProperties(delta, children, recA);
           return {
             top: recB.top,
             left: recB.left,
@@ -133,7 +133,7 @@ function updateStructure(recA, recB) {
         console.log("bottom & right exists");
         if (delta.bottom >= 0 && delta.right >= 0) {
           console.log("contained by B");
-          copyProperties(delta, children, recB);
+          copyProperties(delta, children, recA);
           return {
             bottom: recB.bottom,
             right: recB.right,
@@ -149,7 +149,7 @@ function updateStructure(recA, recB) {
         console.log("top & right exists");
         if (delta.top >= 0 && delta.right >= 0) {
           console.log("contained by B");
-          copyProperties(delta, children, recB);
+          copyProperties(delta, children, recA);
           return {
             top: recB.top,
             right: recB.right,
@@ -165,7 +165,7 @@ function updateStructure(recA, recB) {
         console.log("bottom & left exists");
         if (delta.bottom >= 0 && delta.left >= 0) {
           console.log("contained by B");
-          copyProperties(delta, children, recB);
+          copyProperties(delta, children, recA);
           return {
             bottom: recB.bottom,
             left: recB.left,
@@ -192,7 +192,7 @@ function updateStructure(recA, recB) {
       delta.bottom > 0
     ) {
       console.log("Contained by B");
-      copyProperties(delta, children, recB);
+      copyProperties(delta, children, recA);
       return {
         top: recB.top,
         left: recB.left,
@@ -207,7 +207,7 @@ function updateStructure(recA, recB) {
       delta.bottom <= 0
     ) {
       console.log("contained by A");
-      copyProperties(delta, children, recA);
+      copyProperties(delta, children, recB);
       return {
         top: recA.top,
         left: recA.left,
