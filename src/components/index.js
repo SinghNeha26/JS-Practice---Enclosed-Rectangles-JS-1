@@ -19,7 +19,10 @@ function copyProperties(src, target, obj) {
   }
 }
 function updateStructure(recA, recB) {
-  //write your code
+  //write your codeno
+  console.log("------------------------------------------------------------------------called now------------------------------------------------------------------------");
+  console.log(recA);
+  console.log(recB);
   var delta = {}; //map
   for (const key in recA) {
     if (key == "children") {
