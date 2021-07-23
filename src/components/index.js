@@ -19,10 +19,12 @@ function copyProperties(src, target, obj) {
   }
 }
 function updateStructure(recA, recB) {
-  //write your codeno
-  console.log("------------------------------------------------------------------------called now------------------------------------------------------------------------");
+  console.log(
+    "------------------------------------------------------------------------called now------------------------------------------------------------------------"
+  );
   console.log(recA);
   console.log(recB);
+  //write your code
   var delta = {}; //map
   for (const key in recA) {
     if (key == "children") {
@@ -31,15 +33,15 @@ function updateStructure(recA, recB) {
       delta[key] = isNum(recA[key]) - isNum(recB[key]);
     }
   }
-  console.log(delta);
+  // console.log(delta);
   // If height & width exists
   const children = {};
-  if (delta.height && delta.width) {
+  if (recA.height && recA.width) {
     console.log("height & width exists");
     if (delta.height >= 0 && delta.width >= 0) {
       //A is bigger
       console.log("A is bigger");
-      if (delta.top && delta.left) {
+      if (recA.top && recA.left) {
         // If top & left exists
 
         console.log("top & left exists");
@@ -57,7 +59,7 @@ function updateStructure(recA, recB) {
           console.log("No one contains each other");
           return recA;
         }
-      } else if (delta.bottom && delta.right) {
+      } else if (recA.bottom && recA.right) {
         console.log("bottom & right exists");
         if (delta.bottom <= 0 && delta.right <= 0) {
           console.log("contained by A");
@@ -73,7 +75,7 @@ function updateStructure(recA, recB) {
           console.log("No one contains each other");
           return recA;
         }
-      } else if (delta.top && delta.right) {
+      } else if (recA.top && recA.right) {
         console.log("top & right exists");
         if (delta.top <= 0 && delta.right <= 0) {
           console.log("contained by A");
@@ -89,7 +91,7 @@ function updateStructure(recA, recB) {
           console.log("No one contains each other");
           return recA;
         }
-      } else {
+      } else if (recA.bottom && recA.left) {
         console.log("bottom & left exists");
         if (delta.bottom <= 0 && delta.left <= 0) {
           console.log("contained by A");
@@ -109,7 +111,7 @@ function updateStructure(recA, recB) {
     } else if (delta.height < 0 && delta.width < 0) {
       //B is bigger
       console.log(" B is bigger");
-      if (delta.top && delta.left) {
+      if (recA.top && recA.left) {
         // If top & left exists
 
         console.log("top & left exists");
@@ -127,7 +129,7 @@ function updateStructure(recA, recB) {
           console.log("No one contains each other");
           return recA;
         }
-      } else if (delta.bottom && delta.right) {
+      } else if (recA.bottom && recA.right) {
         console.log("bottom & right exists");
         if (delta.bottom >= 0 && delta.right >= 0) {
           console.log("contained by B");
@@ -143,7 +145,7 @@ function updateStructure(recA, recB) {
           console.log("No one contains each other");
           return recA;
         }
-      } else if (delta.top && delta.right) {
+      } else if (recA.top && recA.right) {
         console.log("top & right exists");
         if (delta.top >= 0 && delta.right >= 0) {
           console.log("contained by B");
@@ -159,7 +161,7 @@ function updateStructure(recA, recB) {
           console.log("No one contains each other");
           return recA;
         }
-      } else {
+      } else if (recA.bottom && recA.left) {
         console.log("bottom & left exists");
         if (delta.bottom >= 0 && delta.left >= 0) {
           console.log("contained by B");
